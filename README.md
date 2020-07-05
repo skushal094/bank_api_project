@@ -11,7 +11,7 @@ This project is created using [Django REST framework](https://www.django-rest-fr
     python manage.py migrate
     python manage.py runscript populate_db
     ```
-> *python manage.py populate_db* command runs the script named [populate_db.py](../blob/master/bank_app/scripts/populate_db.py), which populate the database with the data stored in the csv file.
+> *python manage.py populate_db* command runs the script named [populate_db.py](../master/bank_app/scripts/populate_db.py), which populate the database with the data stored in the csv file.
 *   then to run the server run the following:
     ```bash
     python manage.py runserver
