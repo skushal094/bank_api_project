@@ -36,17 +36,16 @@ def get_branches(request):
         bank_name = request.GET.get('bank_name') if request.GET.get('bank_name') else request.data.get('bank_name')
         city_name = request.GET.get('city_name') if request.GET.get('city_name') else request.data.get('city_name')
         if city_name and bank_name:
-            try:
-                branches = models.Branch.objects.filter(
-                    is_deleted=False, bank__name=bank_name, location__city=city_name
-                )
-                serializer = serializers.BranchSerializer(branches, many=True)
-                return Response({
-                    "status": "OK",
-                    "data": serializer.data
-                }, status=status.HTTP_200_OK)
-            except:
+            branches = models.Branch.objects.filter(
+                is_deleted=False, bank__name=bank_name, location__city=city_name
+            )
+            if len(branches) == 0:
                 raise NotFound
+            serializer = serializers.BranchSerializer(branches, many=True)
+            return Response({
+                "status": "OK",
+                "data": serializer.data
+            }, status=status.HTTP_200_OK)
     return Response({
         "status": "OK",
         "message": "provide 'bank_name' parameter as bank name and 'city_name' parameter"
