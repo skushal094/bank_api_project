@@ -18,7 +18,7 @@ class Bank(CommonModel):
     """
     This model will store names of all the banks.
     """
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=255, unique=True)
 
     def __str__(self):
         """Returns String representation of the model"""
@@ -29,7 +29,7 @@ class State(CommonModel):
     """
     This model will store all the names of the states.
     """
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=255, unique=True)
 
     def __str__(self):
         """Returns String representation of the model"""
@@ -57,7 +57,7 @@ class Branch(CommonModel):
     name = models.CharField(max_length=255)
     bank = models.ForeignKey(Bank, on_delete=models.CASCADE, related_name="branch_bank")
     address = models.TextField()
-    ifsc_code = models.CharField(max_length=255)
+    ifsc_code = models.CharField(max_length=255, unique=True)
     location = models.ForeignKey(Location, on_delete=models.CASCADE, related_name="branch_location")
 
     def __str__(self):
